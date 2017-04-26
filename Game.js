@@ -1,31 +1,32 @@
-var text = document.getElementById("text");
- var buttonBox = document.getElementById('submitButton');
- var input = document.getElementById('input');
+var text = document.getElementById("text")
+ var buttonBox = document.getElementById('submitButton')
+ var input = document.getElementById('input')
  var player;
 
  input.onkeypress = function(event) {
    console.log(input.value);
-   if (event.key == "Enter" || event.keyCode == 13) {
+   if(event.key == "Enter" || event.keyCode == 13) {
      player = input.value;
      input.parentNode.removeChild(input)
      advanceTo(scenario.two)
    }
- };
+ }
 
  var changeText = function(words) {
   text.innerHTML = words.replace("Your", player);
-};
+}
 
-var changeButtons = function(buttonList) {
+var buttonChange = function(ListButtons) {
   submitButton.innerHTML = "";
-  for (var i = 0; i < buttonList.length; i++) {
-    submitButton.innerHTML += "<button onClick="+buttonList[i][1]+">" + buttonList[i][0] + "</button>";
-  };
-};
+  for(var i = 0; i < ListButtons.length; i++) {
+    submitButton.innerHTML += "<button onClick="+ListButtons[i][1]+">" + ListButtons[i][0] + "</button>";
+  }
+}
 
 var advanceTo = function(s) {
   changeText(s.text)
-  changeButtons(s.buttons)
+  buttonChange(s.buttons)
+
 };
 
 var scenario = {
@@ -35,12 +36,12 @@ var scenario = {
   },
   two: {
 
-    text: "",
-    buttons: [["Turn and run", "advanceTo(scenario.three)"],["Enter The House", "advanceTo(scenario.four)"]]
+    text: "You enter the house, you see two long corridors, which do you take?",
+    buttons: [["Left corridor", "advanceTo(scenario.three)"],["Right corridor", "advanceTo(scenario.four)"]]
   },
   three: {
 
-    text: "",
+    text: "You proceed down the Left corridor, the dark brown walls appear to be turning purple, maybe you are just sick from the 2 month old szechuan sauce you ate earlier.",
     buttons: [["continue", "advanceTo(scenario.four)"]]
   },
     four: {
