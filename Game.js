@@ -32,7 +32,7 @@ var advanceTo = function(s) {
 var scenario = {
   one: {
 
-    text: "You are walking and you see an old house, why wouldn't you want to go inside?\n",
+    text: "You are walking and you see an old house, who wouldn't you want to go inside?\n",
   },
   two: {
 
@@ -46,12 +46,12 @@ var scenario = {
   },
     four: {
 
-    text: "",
-    buttons: [["Follow your Dog Downstairs", "advanceTo(scenario.five)"],["Search the Kitchen for a knife", "advanceTo(scenario.five)"]]
+    text: "you proceed down the corridor  ",
+    buttons: [["", "advanceTo(scenario.five)"],["", "advanceTo(scenario.five)"]]
   },
     five: {
 
-    text: "TO BE CONTINUED...",
+    text: "",
 
   },
 
