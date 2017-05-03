@@ -1,7 +1,12 @@
+
 var text = document.getElementById("text")
  var buttonBox = document.getElementById('submitButton')
  var input = document.getElementById('input')
- var player;
+ var player
+ var score = 0
+ var scoreText = makeText("Score: -", 660, 50, 25, "sans-serif", "white", 1)
+  var namespace = "http://www.w3.org/2000/svg"
+
 
  input.onkeypress = function(event) {
    console.log(input.value);
@@ -11,10 +16,27 @@ var text = document.getElementById("text")
      advanceTo(scenario.two)
    }
  }
+ function makeText(message, x, y, fontSize, fontFamily, fill, opacity) {
+   var text = document.createElementNS(namespace, "text")
+   text.innerHTML = message
+   text.setAttribute("x", x)
+   text.setAttribute("y", y)
+   text.setAttribute("font-size", fontSize)
+   text.setAttribute("font-family", fontFamily)
+   text.setAttribute("fill", fill)
+   text.setAttribute("opacity", opacity)
+
+   var canvas = document.getElementById("canvas")
+   canvas.appendChild(text)
+   return text
+ }
 
  var changeText = function(words) {
   text.innerHTML = words.replace("Your", player);
 }
+
+
+
 
 var buttonChange = function(ListButtons) {
   submitButton.innerHTML = "";
@@ -23,11 +45,17 @@ var buttonChange = function(ListButtons) {
   }
 }
 
+
+
 var advanceTo = function(s) {
+
   changeText(s.text)
   buttonChange(s.buttons)
 
+
 };
+
+
 
 var scenario = {
   one: {
@@ -45,14 +73,18 @@ var scenario = {
     buttons: [["continue", "advanceTo(scenario.four)"]]
   },
     four: {
+    text: "you proceed down the corridor, you arrive in a dimly lit room with a note on the wall and a small door next to it.  ",
+    buttons: [["Collect note",  "advanceTo(scenario.five)"],["don't collect note", "advanceTo(scenario.random)"]]
+},
 
-    text: "you proceed down the corridor  ",
-    buttons: [["", "advanceTo(scenario.five)"],["", "advanceTo(scenario.five)"]]
-  },
+random: {
+  text: "you did not collect the note and you attempt to leave, but all the exits seem to have disappeared. ",
+  buttons: [["Collect note", "advanceTo(scenario.five)"]]
+},
+
     five: {
-
-    text: "",
-
+    text: "After collecting the note which appears to have chicken scratch written on it, the small door opens with a dimly lit corridor behind it.",
+     buttons: [["Walk through corridor", "advanceTo(scenario.six)"]]
   },
 
 };
